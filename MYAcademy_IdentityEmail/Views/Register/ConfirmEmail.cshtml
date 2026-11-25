@@ -1,0 +1,28 @@
+﻿@model ConfirmEmailViewModel
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5" style="max-width: 400px;">
+    <h4>E-posta Doğrulama</h4>
+    <p class="text-muted">@Model.Email adresine gelen kodu girin.</p>
+
+    <form method="post">
+        <input type="hidden" asp-for="Email" />
+
+        <div class="mb-3">
+            <input asp-for="ValidationCode" class="form-control" placeholder="6 haneli kod" />
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+        <button type="submit" class="btn btn-primary w-100">Doğrula</button>
+       
+    </form>
+    <form asp-action="ResendCode" asp-controller="Register" method="post" class="mt-2">
+        <input type="hidden" name="email" value="@Model.Email" />
+        <button type="submit" class="btn btn-outline-secondary w-100">Kodu Tekrar Gönder</button>
+    </form>
+</div>
